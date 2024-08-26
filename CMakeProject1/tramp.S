@@ -7,6 +7,14 @@
 returnFromSignalTramp2:
         .cfi_startproc
 
+        push    rbp
+        .cfi_adjust_cfa_offset 8
+        .cfi_rel_offset rbp, 0
+
+        mov     rbp, rsp
+        .cfi_def_cfa_register rbp
+        .cfi_def_cfa_offset 16
+
         call returnFromSignalHandlerWorker
 
         int 3
